@@ -27,7 +27,4 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
-
-  @OneToMany(() => Reminder, (reminder) => reminder.user)
-  reminders: Reminder[];
 }

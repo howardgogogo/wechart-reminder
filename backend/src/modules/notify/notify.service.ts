@@ -19,11 +19,11 @@ export class NotifyService {
   ) {}
 
   async sendReminder(reminder: Reminder): Promise<boolean> {
-    const user = reminder.user;
+    const openid = reminder.openid;
     const message = this.reminderService.formatReminderMessage(reminder);
 
     const success = await this.wechatEnterpriseService.sendMessage(
-      user.openid,
+      openid,
       message,
     );
 
