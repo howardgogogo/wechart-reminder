@@ -105,7 +105,6 @@ export class ReminderService {
         isEnabled: true,
         remindTime: Between(startOfDay, endOfDay),
       },
-      relations: ['user'],
     });
   }
 

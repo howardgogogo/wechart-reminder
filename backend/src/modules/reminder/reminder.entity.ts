@@ -17,12 +17,11 @@ export class Reminder {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'user_id' })
+  @Column({ name: 'user_id', type: 'varchar', length: 255 })
   userId: string;
 
-  @ManyToOne(() => User, (user) => user.reminders, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+  @Column({ nullable: true })
+  openid: string;
 
   @Column({
     type: 'enum',
