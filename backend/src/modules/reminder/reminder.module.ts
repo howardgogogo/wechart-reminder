@@ -9,6 +9,6 @@ import { BatchParserService } from './parser/batch-parser.service';
   imports: [TypeOrmModule.forFeature([Reminder])],
   controllers: [ReminderController],
   providers: [ReminderService, BatchParserService],
-  exports: [ReminderService],
+  exports: [ReminderService, TypeOrmModule],
 })
 export class ReminderModule {}
