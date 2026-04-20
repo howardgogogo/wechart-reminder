@@ -8,7 +8,7 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../../user/user.entity';
+import { User } from '../user/user.entity';
 import { ReminderLog } from './reminder-log.entity';
 
 export enum ReminderMode {

@@ -42,21 +42,25 @@ export class ReminderService {
     const validDtos = parseResult.valid.map((v) => v.data);
     const reminders = await this.batchCreate(userId, validDtos);
 
+    const results: any[] = parseResult.valid.map((v, i) => ({
+      lineNumber: v.lineNumber,
+      title: reminders[i]?.title,
+      success: true,
+    }));
+
+    parseResult.invalid.forEach((v) => {
+      results.push({
+        lineNumber: v.lineNumber,
+        line: v.line,
+        success: false,
+        error: v.error,
+      });
+    });
+
     return {
       success: parseResult.valid.length,
       failed: parseResult.invalid.length,
-      results: parseResult.valid.map((v, i) => ({
-        lineNumber: v.lineNumber,
-        title: reminders[i]?.title,
-        success: true,
-      })).concat(
-        parseResult.invalid.map((v) => ({
-          lineNumber: v.lineNumber,
-          line: v.line,
-          success: false,
-          error: v.error,
-        })),
-      ),
+      results,
     };
   }
 
