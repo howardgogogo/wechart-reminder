@@ -55,7 +55,6 @@ export class ReminderCronService {
 
     const allReminders = await this.reminderRepository.find({
       where: { isEnabled: true },
-      relations: ['user'],
     });
 
     return allReminders.filter((reminder) => {

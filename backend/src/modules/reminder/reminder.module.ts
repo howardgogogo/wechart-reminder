@@ -4,9 +4,10 @@ import { Reminder } from './reminder.entity';
 import { ReminderController } from './reminder.controller';
 import { ReminderService } from './reminder.service';
 import { BatchParserService } from './parser/batch-parser.service';
+import { NotifyModule } from '../notify/notify.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Reminder])],
+  imports: [TypeOrmModule.forFeature([Reminder]), NotifyModule],
   controllers: [ReminderController],
   providers: [ReminderService, BatchParserService],
   exports: [ReminderService, TypeOrmModule],

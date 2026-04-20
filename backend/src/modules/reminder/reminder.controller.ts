@@ -10,13 +10,17 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { ReminderService } from './reminder.service';
+import { NotifyService } from '../notify/notify.service';
 import { CreateReminderDto } from './dto/create-reminder.dto';
 import { UpdateReminderDto } from './dto/update-reminder.dto';
 
 @ApiTags('Reminders')
 @Controller('reminders')
 export class ReminderController {
-  constructor(private readonly reminderService: ReminderService) {}
+  constructor(
+    private readonly reminderService: ReminderService,
+    private readonly notifyService: NotifyService,
+  ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new reminder' })
@@ -74,5 +78,14 @@ export class ReminderController {
   @ApiOperation({ summary: 'Get reminders due today' })
   findTodayReminders() {
     return this.reminderService.findTodayReminders();
+  }
+
+  @Post('test-push/:id')
+  @ApiOperation({ summary: 'Test push a reminder now' })
+  testPush(@Param('id') id: string, @Query('userId') userId: string) {
+    return this.reminderService.findOne(id, userId).then(async (reminder) => {
+      const result = await this.notifyService.sendReminder(reminder);
+      return { success: result, message: result ? '发送成功' : '发送失败' };
+    });
   }
 }
