@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Reminder } from '../reminder/reminder.entity';
-import { ReminderLog, SendStatus } from '../reminder/reminder-log.entity';
+import { Reminder, SendStatus } from '../reminder/reminder.entity';
+import { ReminderLog } from '../reminder/reminder-log.entity';
 import { WechatEnterpriseService } from './wechat-enterprise.service';
 import { ReminderService } from '../reminder/reminder.service';
 
