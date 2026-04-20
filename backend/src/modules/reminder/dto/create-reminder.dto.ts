@@ -1,7 +1,7 @@
 import { IsString, IsEnum, IsBoolean, IsOptional, IsDate, IsInt, Min, Max } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ReminderMode, RepeatType } from '../reminder.entity';
+import { ReminderMode, RepeatType } from '../enums';
 
 export class CreateReminderDto {
   @ApiProperty({ description: 'Reminder mode', enum: ReminderMode })

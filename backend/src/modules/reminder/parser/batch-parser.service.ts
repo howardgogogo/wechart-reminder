@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ReminderMode, RepeatType } from '../reminder.entity';
+import { ReminderMode, RepeatType } from '../enums';
 import { CreateReminderDto } from '../dto/create-reminder.dto';
 
 export interface ParseResult {

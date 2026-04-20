@@ -6,7 +6,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Reminder, SendStatus } from './reminder.entity';
+import { Reminder } from './reminder.entity';
+import { SendStatus } from './enums';
 
 @Entity('reminder_logs')
 export class ReminderLog {

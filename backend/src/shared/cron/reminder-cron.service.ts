@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Reminder, RepeatType } from '../../modules/reminder/reminder.entity';
+import { Reminder, RepeatType } from '../../modules/reminder/enums';
 import { ReminderService } from '../../modules/reminder/reminder.service';
 import { NotifyService } from '../../modules/notify/notify.service';
 import { LunarService } from '../lunar/lunar.service';
