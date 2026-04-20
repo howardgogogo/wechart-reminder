@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
-import { Reminder, ReminderMode, RepeatType } from './enums';
+import { Reminder } from './reminder.entity';
+import { ReminderMode, RepeatType } from './enums';
 import { CreateReminderDto } from './dto/create-reminder.dto';
 import { UpdateReminderDto } from './dto/update-reminder.dto';
 import { BatchParserService } from './parser/batch-parser.service';
