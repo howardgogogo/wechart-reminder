@@ -3,6 +3,8 @@ FROM node:18-alpine
 WORKDIR /app
 
 COPY backend/package*.json ./backend/
+COPY backend/tsconfig.json ./backend/
+COPY backend/nest-cli.json ./backend/
 WORKDIR /app/backend
 RUN npm install
 
