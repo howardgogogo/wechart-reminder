@@ -1,15 +1,11 @@
-FROM node:18-alpine
+FROM node:18-alpine                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WORKDIR /app                                                                                                                                                                                                                               
+  COPY backend/package*.json ./backend/
+  WORKDIR /app/backend
+  RUN npm install
 
-WORKDIR /app
+  COPY backend/prisma ./prisma
+  RUN npx prisma generate
 
-COPY package*.json ./
-RUN npm install
-
-COPY prisma ./prisma
-RUN npx prisma generate
-
-COPY . .
-
-RUN npm run build
-
-CMD ["node", "dist/main.js"]
+  COPY backend/src ./src
+  RUN npm run build                                                                                                                                                                                                                          
+  CMD ["node", "dist/main.js"]
