@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String      @id @default(uuid())
+  openid       String      @unique
+  nickname     String?
+  enterpriseId String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  reminders    Reminder[]
+
+  @@map("users")
+}
+
+model Reminder {
+  id           String       @id @default(uuid())
+  userId       String
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mode         ReminderMode
+  title        String
+  content      String?
+  location     String?
+  remindTime   DateTime
+  isLunar      Boolean      @default(false)
+  repeatType   RepeatType  @default(ONCE)
+  isEnabled    Boolean      @default(true)
+  lastRemindAt DateTime?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  logs         ReminderLog[]
+
+  @@map("reminders")
+}
+
+model ReminderLog {
+  id         String   @id @default(uuid())
+  reminderId String
+  reminder   Reminder @relation(fields: [reminderId], references: [id], onDelete: Cascade)
+  sentAt     DateTime @default(now())
+  status     SendStatus
+  errorMsg   String?
+
+  @@map("reminder_logs")
+}
+
+enum ReminderMode {
+  BIRTHDAY
+  MEETING
+  CLASS
+  SCHEDULE
+  CUSTOM
+
+  @@map("reminder_mode")
+}
+
+enum RepeatType {
+  ONCE
+  YEARLY
+  MONTHLY
+  WEEKLY
+
+  @@map("repeat_type")
+}
+
+enum SendStatus {
+  SUCCESS
+  FAILED
+
+  @@map("send_status")
+}
